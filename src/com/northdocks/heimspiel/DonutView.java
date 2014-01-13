@@ -2,21 +2,23 @@ package com.northdocks.heimspiel;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
 public class DonutView extends AnimatedStatsView {
 
-    // angle=0 is 3 o'clock so we need to rotate counterclockwise by 90 degrees
+    private final Paint paint = new Paint();
+    private final Paint textPaint = new Paint();
+    private final RectF rect = new RectF();
+
+    /**
+     * angle=0 is 3 o'clock so we need to rotate counterclockwise by 90 degrees
+     */
     private int OFFSET = -90;
     private int amount = 0;
     private int totalAmount = 0;
     private float strokeSize = 20f;
-    private final Paint paint = new Paint();
-    private final Paint textPaint = new Paint();
-    private final RectF rect = new RectF();
 
     public DonutView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -68,7 +70,7 @@ public class DonutView extends AnimatedStatsView {
         textPaint.setSubpixelText(true);
         textPaint.setTextSize(AnimatedStatsView.lerp((getWidth() / 6), (getWidth() / 4), animationProgress));
         textPaint.setColor(primaryColor);
-        textPaint.setAlpha(Math.min((int)(animationProgress * 255 * 2), 255));
+        textPaint.setAlpha(Math.min((int) (animationProgress * 255 * 2), 255));
 
         float textX = getWidth() / 2;
         float textY = ((canvas.getHeight() / 2) - ((textPaint.descent() + textPaint.ascent()) / 2));

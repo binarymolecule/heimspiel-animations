@@ -1,7 +1,5 @@
 package com.northdocks.heimspiel;
 
-import android.animation.Animator;
-import android.animation.TimeAnimator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -13,12 +11,12 @@ import android.view.animation.DecelerateInterpolator;
 
 public abstract class AnimatedStatsView extends View {
 
+    private static final String TAG = AnimatedStatsView.class.getCanonicalName();
     protected int primaryColor = Color.WHITE;
     protected int secondaryColor = Color.RED;
     protected float animationProgress = 0;
     private ValueAnimator animator;
     private long animationLength = 500;
-    private static final String TAG = AnimatedStatsView.class.getCanonicalName();
     private TimeInterpolator interpolator = new DecelerateInterpolator();
 
     public AnimatedStatsView(Context context, AttributeSet attrs, int defStyle) {
@@ -31,6 +29,21 @@ public abstract class AnimatedStatsView extends View {
 
     public AnimatedStatsView(Context context) {
         super(context);
+    }
+
+    public static float clamp(float min, float max, float t) {
+        if (max < min) {
+            float tmp = max;
+            max = min;
+            min = max;
+        }
+
+        return Math.max(min, Math.min(max, t));
+    }
+
+    public static float lerp(float from, float to, float t) {
+        t = clamp(0, 1, t);
+        return from + t * (to - from);
     }
 
     //primaryAmount ist das, was mit dem weißen Teil der Grafik dargestellt wird
@@ -98,21 +111,6 @@ public abstract class AnimatedStatsView extends View {
     protected void onProgress(float progress) {
         this.animationProgress = progress;
         invalidate();
-    }
-
-    public static float clamp(float min, float max, float t) {
-        if (max < min) {
-            float tmp = max;
-            max = min;
-            min = max;
-        }
-
-        return Math.max(min, Math.min(max, t));
-    }
-
-    public static float lerp(float from, float to, float t) {
-        t = clamp(0, 1, t);
-        return from + t * (to - from);
     }
 }
 

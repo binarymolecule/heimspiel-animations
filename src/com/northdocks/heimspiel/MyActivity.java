@@ -13,12 +13,12 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        barView = (BarView)findViewById(R.id.barView);
+        barView = (BarView) findViewById(R.id.barView);
         barView.setData(80, 80);
         barView.setSecondaryData(40, 60);
         barView.setAnimationLength(1000);
 
-        donutView = (DonutView)findViewById(R.id.donutView);
+        donutView = (DonutView) findViewById(R.id.donutView);
         donutView.setData(60, 100);
         donutView.setAnimationLength(1500);
     }

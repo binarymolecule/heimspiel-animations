@@ -19,9 +19,11 @@ public class BarView extends AnimatedStatsView {
     public BarView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
     public BarView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
     public BarView(Context context) {
         super(context);
     }
