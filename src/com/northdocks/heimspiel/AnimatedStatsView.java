@@ -31,6 +31,15 @@ public abstract class AnimatedStatsView extends View {
         super(context);
     }
 
+    /**
+     * Clamp a value between a minimum and a maximum.
+     * If min > max, min and max are swapped.
+     *
+     * @param min The minimum value of the result
+     * @param max The maximum value of the result
+     * @param t   The value to be clamped
+     * @return The clamped value
+     */
     public static float clamp(float min, float max, float t) {
         if (max < min) {
             float tmp = max;
@@ -41,17 +50,30 @@ public abstract class AnimatedStatsView extends View {
         return Math.max(min, Math.min(max, t));
     }
 
+    /**
+     * Linear interpolation (also known as "lerp") between two values
+     *
+     * @param from the start value (for t = 0)
+     * @param to   the end value (for t = 1)
+     * @param t    value in the range between [0,1]
+     * @return The interpolated result
+     */
     public static float lerp(float from, float to, float t) {
         t = clamp(0, 1, t);
         return from + t * (to - from);
     }
 
-    //primaryAmount ist das, was mit dem weißen Teil der Grafik dargestellt wird
+    /**
+     * @param primaryAmount Das, was normalerweise weiß (ergo mit der Primärfarbe dargestellt wird)
+     * @param totalAmount
+     */
     public abstract void setData(int primaryAmount, int totalAmount);
 
-    //setzt die Animation zurück, falls sie läuft. Der View zeigt danach entweder
-    //den Zustand vor der Animation (showAnimationEnd==false) oder nach der Animation
-    //(showAnimationEnd==true).
+    /**
+     * Setzt die Animation zurück, falls sie läuft.
+     *
+     * @param showAnimationEnd Wenn true, wird die Animation auf den Endzustand gesetzt.
+     */
     public void resetAnimationState(boolean showAnimationEnd) {
         cancelAnimation();
         animationProgress = (showAnimationEnd ? 1 : 0);
@@ -71,7 +93,9 @@ public abstract class AnimatedStatsView extends View {
         this.interpolator = interpolator;
     }
 
-    //animation startet und bleibt danach im Endzustand.
+    /**
+     * Startet die Animation und bleibt danach im Endzustand.
+     */
     public void startAnimation() {
         Log.d(TAG, "Starting animation...");
 
@@ -94,7 +118,11 @@ public abstract class AnimatedStatsView extends View {
         animator.start();
     }
 
-    //setzt Dauer der Animation in Millisekunden, default ist 500
+    /**
+     * Setzt die Dauer der Animation
+     *
+     * @param millis Dauer der Animation in Millisekunden (default: 500ms)
+     */
     public void setAnimationLength(int millis) {
         assert millis > 0;
         cancelAnimation();
