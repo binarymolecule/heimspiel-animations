@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World, MyActivity"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:padding="10dp"
+            />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+        <com.northdocks.heimspiel.BarView android:layout_width="100dp" android:layout_height="100dp" android:id="@+id/barView"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:onClick="onResetBarView"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start" android:onClick="onStartBarView"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100%" android:onClick="onEndBarView"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <com.northdocks.heimspiel.DonutView android:layout_width="100dp" android:layout_height="100dp" android:id="@+id/donutView"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:onClick="onResetDonutView"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start" android:onClick="onStartDonutView"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100%" android:onClick="onEndDonutView"/>
+    </LinearLayout>
+</LinearLayout>
+
